@@ -5,7 +5,7 @@ function Navbar() {
 	return (
 		<nav className="navbar navbar-expand-lg bg-body-tertiary">
 			<div className="container-fluid">
-				<a className="navbar-brand" href="#">
+				<a className="navbar-brand" href="/">
                     <img src={doctor_pepe} alt="Logo" width="30" height="24" className="d-inline-block align-text-top"></img>
                     Dr.Pepe Hospital
 				</a>
@@ -24,15 +24,15 @@ function Navbar() {
 					<ul className="navbar-nav">
 						<li className="nav-item">
 							<a
-								className="nav-link active"
+								className="nav-link"
 								aria-current="page"
-								href="#"
+								href="/"
 							>
 								Home
 							</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">
+							<a className="nav-link" href="/new">
 								Add Patient
 							</a>
 						</li>

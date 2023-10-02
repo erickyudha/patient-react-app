@@ -1,17 +1,20 @@
-import './App.css'
-import Navbar from './components/Navbar'
-import PatientTable from "./components/PatientTable"
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import NewPatient from './NewPatient.jsx'
+import NotFound from './NotFound.jsx'
+import Index from './Index'
 
 function App() {
 
   return (
-    <>
-      <Navbar></Navbar>
-      <div className='content'>
-        <h1>Patient Room Database</h1>
-        <PatientTable></PatientTable>
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/'>
+          <Route index element={<Index />} />
+          <Route path='new' element={<NewPatient />} />
+          <Route path='*' element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
