@@ -21,7 +21,7 @@ function PatientTable() {
 					<td>VIP-1</td>
                     <td>2023-10-01</td>
                     <td>
-                        <button className="btn btn-danger">Delete</button>
+                        <button className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                     </td>
 				</tr>
 			</tbody>

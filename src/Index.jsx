@@ -1,3 +1,4 @@
+import DeleteModal from './components/DeleteModal'
 import Navbar from './components/Navbar'
 import PatientTable from "./components/PatientTable"
 import "./Index.css"
@@ -10,6 +11,7 @@ function Index() {
                 <h1>Patient Room Database</h1>
                 <PatientTable />
             </div>
+            <DeleteModal />
         </>
     )
 }

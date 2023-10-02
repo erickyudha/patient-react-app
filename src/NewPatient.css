@@ -1,0 +1,19 @@
+.input-form {
+    display: grid;
+    width: 100%;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    display: grid;
+    gap: 5px;
+}
+
+.input-group > label {
+    color: rgb(106, 106, 106);
+}
+
+.input-group > input {
+    padding: 5px;
+}
