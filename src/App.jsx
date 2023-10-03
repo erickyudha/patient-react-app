@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import NewPatient from './NewPatient.jsx'
 import NotFound from './NotFound.jsx'
-import Index from './Index'
+import Index from './Index.jsx'
 
 function App() {
 
