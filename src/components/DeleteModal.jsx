@@ -1,24 +1,38 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import patientData from "../data/PatientData";
 
-function DeleteModal({deletePatientData, patientData}) {
+/* eslint-disable react/prop-types */
+function DeleteModal({ selectedPatientID, handleRefresh }) {
+	const [selectedPatient, setSelectedPatient] = useState(null);
 
-	console.log(deletePatientData)
-	let history = useNavigate()
+	const getPatientByID = (id) => {
+		const patient = patientData.find((patient) => patient.PatientID === id);
+		return patient || null; // Return null if no patient with the specified ID is found
+	};
 
-    // Deleted function - functionality 
-    // for deleting the entry
-    function deleted(id) {
-		console.log(id)
-        var index = patientData.map(function (e) { 
-            return e.id; }).indexOf(id);
-  
-        // deleting the entry with index
-        patientData.splice(index, 1)
-  
-        // We need to re-render the page for getting 
-        // the results so redirect to same page.
-        history('/')
-    }
+	
+
+	const deletePatientByID = (id) => {
+		const index = patientData.findIndex(
+			(patient) => patient.PatientID === id
+		);
+
+		if (index !== -1) {
+			// Patient with the specified ID exists; remove it from the array
+			patientData.splice(index, 1);
+		}
+
+		handleRefresh(true)
+	};
+
+	const handleDeleteClick = () => {
+		deletePatientByID(selectedPatientID)
+	}
+
+	useEffect(() => {
+		setSelectedPatient(getPatientByID(selectedPatientID));
+	}, [selectedPatientID]);
+
 	return (
 		<div
 			className="modal fade"
@@ -31,7 +45,7 @@ function DeleteModal({deletePatientData, patientData}) {
 				<div className="modal-content">
 					<div className="modal-header">
 						<h1 className="modal-title fs-5" id="deleteModalLabel">
-							Confirm Delete Patient Data
+							Confirm Delete
 						</h1>
 						<button
 							type="button"
@@ -40,7 +54,9 @@ function DeleteModal({deletePatientData, patientData}) {
 							aria-label="Close"
 						></button>
 					</div>
-					<div className="modal-body">Delete data of patient </div>
+					<div className="modal-body">
+						Remove {(selectedPatient == null) ? "" : selectedPatient.Name} from entries?
+					</div>
 					<div className="modal-footer">
 						<button
 							type="button"
@@ -49,7 +65,7 @@ function DeleteModal({deletePatientData, patientData}) {
 						>
 							Close
 						</button>
-						<button type="button" className="btn btn-danger" onClick={e => deleted(deletePatientData.patientID)}>
+						<button type="button" className="btn btn-danger" onClick={handleDeleteClick} data-bs-dismiss="modal">
 							Delete
 						</button>
 					</div>
@@ -59,4 +75,4 @@ function DeleteModal({deletePatientData, patientData}) {
 	);
 }
 
-export default DeleteModal
+export default DeleteModal;
