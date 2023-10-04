@@ -6,7 +6,7 @@ function PatientTable({ patientData, deleteCallback }) {
 
   return (
     <table className="table table-striped table-bordered">
-      <thead>
+      <thead align="center">
         <tr>
           <th scope="col">No</th>
           <th scope="col">Patient ID</th>
