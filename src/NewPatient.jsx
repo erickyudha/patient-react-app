@@ -1,11 +1,8 @@
-import Navbar from "./components/Navbar";
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import patientData from "./data/PatientData.js";
 import "./NewPatient.css";
 
-function NewPatient() {
-  const [patientID, setPatientID] = useState("")
+function NewPatient({patientsData, setPatientData, handleRefresh}) {
   
   var today = new Date()
  
@@ -14,7 +11,12 @@ function NewPatient() {
   useEffect(() => {
     // Generate a random patient ID when the component mounts
     const randomID = generateRandomID();
-    setPatientID(randomID);
+    if (state.PatientID == "") {
+      setState({
+        ...state,
+        PatientID: randomID
+      })
+    }
   }, []);
 
   const generateRandomID = () => {
@@ -33,10 +35,11 @@ function NewPatient() {
   // Making usestate for setting and
   // fetching a value in jsx
   const [state, setState] = useState({
-    name: "",
-    age: "",
-    roomNumber: "",
-    registeredDate: "",
+    PatientID: "",
+    Name: "",
+    Age: "",
+    RoomNumber: "",
+    RegisteredDate: "",
   });
 
   const handleChange = (event) => {
@@ -48,31 +51,34 @@ function NewPatient() {
     });
   };
 
-  // Using useNavigation for redirecting to pages
-  let history = useNavigate();
-
   // Function for creating a post/entry
   const handelSubmit = (e) => {
     e.preventDefault(); // Prevent reload
+    const patientDataCopy = patientsData
 
     // Fetching a value from usestate and
     // pushing to javascript object
-    patientData.push({
-      PatientID: patientID,
+    patientDataCopy.push({
+      PatientID: state.PatientID,
       Name: state.name,
       Age: state.age,
       RoomNumber: state.roomNumber,
       RegisteredDate: date,
     });
-
-    // Redirecting to home page after creation done
-    history("/");
+    setPatientData(patientDataCopy)
+    setState({
+      PatientID: generateRandomID(),
+      Name: "",
+      Age: "",
+      RoomNumber: "",
+      RegisteredDate: "",
+    })
+    handleRefresh(true)
   };
 
   // Get Patient Registered Date On Submit
   return (
     <>
-      <Navbar />
       <div className="content">
         <h1>New Patient Form</h1>
         <div id="patient-form">
@@ -83,8 +89,8 @@ function NewPatient() {
                 type="text"
                 id="patient-id"
                 name="patient-id"
-                value={patientID}
-                disabled
+                onChange={handleChange}
+                value={state.PatientID}
               />
             </div>
             <div className="input-group">
@@ -94,6 +100,7 @@ function NewPatient() {
                 id="name"
                 onChange={handleChange}
                 name="name"
+                value={state.Name}
               />
             </div>
             <div className="input-group">
@@ -103,6 +110,7 @@ function NewPatient() {
                 id="age"
                 onChange={handleChange}
                 name="age"
+                value={state.Age}
               />
             </div>
             <div className="input-group">
@@ -112,6 +120,7 @@ function NewPatient() {
                 id="roomNumber"
                 onChange={handleChange}
                 name="roomNumber"
+                value={state.RoomNumber}
               />
             </div>
           </div>

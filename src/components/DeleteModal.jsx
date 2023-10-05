@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import patientData from "../data/PatientData";
 
 /* eslint-disable react/prop-types */
-function DeleteModal({ selectedPatientID, handleRefresh }) {
+function DeleteModal({ selectedPatientID, handleRefresh, patientData, setPatientData }) {
 	const [selectedPatient, setSelectedPatient] = useState(null);
 
 	const getPatientByID = (id) => {
@@ -10,18 +9,18 @@ function DeleteModal({ selectedPatientID, handleRefresh }) {
 		return patient || null; // Return null if no patient with the specified ID is found
 	};
 
-	
-
 	const deletePatientByID = (id) => {
-		const index = patientData.findIndex(
+		const patientDataCopy = patientData
+		const index = patientDataCopy.findIndex(
 			(patient) => patient.PatientID === id
 		);
 
 		if (index !== -1) {
 			// Patient with the specified ID exists; remove it from the array
-			patientData.splice(index, 1);
+			patientDataCopy.splice(index, 1);
 		}
 
+		setPatientData(patientDataCopy)
 		handleRefresh(true)
 	};
 
