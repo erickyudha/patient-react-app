@@ -11,7 +11,7 @@ Once you have Node.js and npm installed, follow these steps to get the app up an
 1. Clone this repository to your local machine using the following command:
 
    ```bash
-   git clone https://github.com/your-username/patient-react-app.git
+   git clone https://github.com/erickyudha/patient-react-app.git
    ```
 
    Replace `your-username` with your GitHub username or the URL of your forked repository.
