@@ -100,7 +100,6 @@ function NewPatient({patientsData, setPatientData, handleRefresh}) {
                 id="name"
                 onChange={handleChange}
                 name="name"
-                value={state.Name}
               />
             </div>
             <div className="input-group">
@@ -110,7 +109,6 @@ function NewPatient({patientsData, setPatientData, handleRefresh}) {
                 id="age"
                 onChange={handleChange}
                 name="age"
-                value={state.Age}
               />
             </div>
             <div className="input-group">
@@ -120,7 +118,6 @@ function NewPatient({patientsData, setPatientData, handleRefresh}) {
                 id="roomNumber"
                 onChange={handleChange}
                 name="roomNumber"
-                value={state.RoomNumber}
               />
             </div>
           </div>
